@@ -8,3 +8,6 @@
 
 ### Server 연동
 - Moya
+
+### 디자인 패턴
+- MVVM
