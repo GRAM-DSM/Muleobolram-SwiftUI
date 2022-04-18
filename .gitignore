@@ -46,3 +46,4 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 iOSInjectionProject/
+.DS_Store
