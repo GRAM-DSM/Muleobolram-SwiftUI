@@ -6,6 +6,7 @@ target 'Muleobolram' do
   use_frameworks!
 
   # Pods for your project
-  pod 'SwiftLint', '~> 0.47.0'
-
+  pod 'Moya/Combine', '~> 15.0'
+  pod 'Swinject', '~> 2.8.1'
+  pod 'SwiftLint', '~>0.47.0'
 end
