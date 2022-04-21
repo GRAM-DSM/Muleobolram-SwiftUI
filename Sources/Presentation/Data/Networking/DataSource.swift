@@ -7,6 +7,8 @@ final class DataSource: MoyaProvider<RestAPI> {
 
     static let shared = DataSource()
 
+    private init() { }
+
     // auth
     func login(
         _ id: String,
@@ -54,6 +56,12 @@ final class DataSource: MoyaProvider<RestAPI> {
         return requestVoidPublisher(.deleteCommunity(postId: postId))
     }
 
+    func fetchCommunity() -> AnyPublisher<[Community], NetworkingError> {
+        return requestPublisher(.fetchCommunity, CommunityListDTO.self)
+            .map { $0.toDomain() }
+            .eraseToAnyPublisher()
+    }
+
     // comment
     func postComment(
         _ postId: Int,
@@ -63,5 +71,11 @@ final class DataSource: MoyaProvider<RestAPI> {
             postId: postId,
             content: content
         ))
+    }
+
+    func fetchComment(_ postId: Int) -> AnyPublisher<[Comment], NetworkingError> {
+        return requestPublisher(.fetchComment(postId: postId), CommentListDTO.self)
+            .map { $0.toDomain() }
+            .eraseToAnyPublisher()
     }
 }
