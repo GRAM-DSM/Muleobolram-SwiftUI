@@ -4,7 +4,7 @@ import Combine
 
 protocol Repository {
     // auth
-    func login(_ id: String, _ password: String) -> Future<Void, NetworkingError>
+    func login(_ id: String, _ password: String) -> AnyPublisher<Void, NetworkingError>
     func signup(_ id: String, _ password: String, _ name: String) -> Future<Void, NetworkingError>
     func checkId(_ id: String) -> Future<Void, NetworkingError>
 
