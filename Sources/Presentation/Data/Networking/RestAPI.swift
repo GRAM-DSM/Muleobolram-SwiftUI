@@ -22,25 +22,25 @@ enum RestAPI {
 extension RestAPI: TargetType {
 
     var baseURL: URL {
-        URL(string: "")!
+        URL(string: "http://13.124.231.212:5000")!
     }
 
     var path: String {
         switch self {
         case .login:
-            return "/login"
+            return "/auths/login"
         case .signup:
-            return "/signup"
+            return "/auths/signups"
         case .checkId:
-            return "/auth"
+            return "/auths"
         case .postCommunity, .fetchCommunity:
-            return "/post"
-        case .deleteCommunity(let postId):
-            return "/post/\(postId)"
+            return "/posts"
+        case .deleteCommunity:
+            return "/posts"
         case .postComment(let postId, _):
-            return "/comment?post_id=\(postId)"
+            return "/comments?post_id=\(postId)"
         default:
-            return "/comment"
+            return "/commenst"
         }
     }
 
@@ -77,9 +77,9 @@ extension RestAPI: TargetType {
         case .checkId(let id):
             return .requestParameters(
                 parameters: [
-                    "id": id
+                    "userId": id
                 ],
-                encoding: JSONEncoding.default
+                encoding: URLEncoding.queryString
             )
         case .postCommunity(let title, let content):
             return .requestParameters(
@@ -102,12 +102,25 @@ extension RestAPI: TargetType {
                 ],
                 encoding: URLEncoding.queryString
             )
+        case .deleteCommunity(let postId):
+            return .requestParameters(
+                parameters: [
+                    "id": postId
+                ],
+                encoding: URLEncoding.queryString
+            )
         default:
             return .requestPlain
         }
     }
 
     var headers: [String: String]? {
-        return ["Authorization": "Bearer "]
+        switch self {
+        case .login, .signup, .checkId:
+            return ["Content-type": "application/json"]
+        default:
+            let token = KeychainDataSource.shared.fetchAccessToken()
+            return ["Authorization": "Barer \(token)"]
+        }
     }
 }
