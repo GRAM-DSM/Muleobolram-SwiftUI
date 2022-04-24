@@ -10,13 +10,15 @@ final class DefaultRepository: Repository {
     func login(
         _ id: String,
         _ password: String
-    ) -> AnyPublisher<Void, NetworkingError> {
-        return dataSource.login(id, password)
-            .map { token -> Void in
-                self.keychainDataSource.registerAccessToken(token.accessToken)
-                self.keychainDataSource.registerRefreshToken(token.refreshToken)
-                return ()
-            }.eraseToAnyPublisher()
+    ) -> Future<Void, NetworkingError> {
+        return Future<Void, NetworkingError> { _ in
+            self.dataSource.login(id, password)
+                .map { token -> Void in
+                    self.keychainDataSource.registerAccessToken(token.accessToken)
+                    self.keychainDataSource.registerRefreshToken(token.refreshToken)
+                    return ()
+                }.mapError { NetworkingError($0) }
+        }
     }
 
     func signup(
@@ -35,7 +37,7 @@ final class DefaultRepository: Repository {
         _ title: String,
         _ content: String
     ) -> Future<Void, NetworkingError> {
-        return postCommunity(title, content)
+        return dataSource.postCommunity(title, content)
     }
 
     func fetchCommunity() -> AnyPublisher<[Community], NetworkingError> {
