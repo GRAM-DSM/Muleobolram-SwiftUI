@@ -8,7 +8,7 @@ enum NetworkingError: Int, Error {
     case badReq = 400
     case tokenError = 401
     case forbidden = 403
-    case notFount = 404
+    case notFound = 404
     case conflict = 409
     case fail = 0
 
@@ -30,7 +30,7 @@ enum NetworkingError: Int, Error {
             return "잘못된 Request"
         case .tokenError:
             return "토큰 에러"
-        case .notFount:
+        case .notFound:
             return "게시물을 찾을 수가 없음"
         case .forbidden:
             return "권한 없음."
