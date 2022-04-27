@@ -5,84 +5,109 @@ struct SignupView: View {
     @Binding var moveScene: Bool
 
     var body: some View {
-        NavigationView {
+        ZStack {
+            Image.backgroundImage
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
             VStack {
+                Spacer()
+                    .frame(height: 89)
+                HStack {
+                    Spacer()
+                        .frame(width: 48)
+                    Button {
+                        self.moveScene.toggle()
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .foregroundColor(.white)
+                            .frame(width: 18, height: 18)
+                            .padding()
+                    }
+                    Spacer()
+                }
 
                 Spacer()
-
-                HStack(spacing: 30) {
-                    Spacer()
-                    ZStack {
-                        TextField("아이디를 입력하세요", text: $viewModel.id)
-                            .padding()
-                            .border(.black, width: 0.5)
-                        HStack {
-                            Spacer()
+                Group {
+                    HStack(spacing: 35) {
+                        Spacer()
+                        ZStack(alignment: .trailing) {
+                            VStack(alignment: .leading) {
+                                Text("아이디")
+                                    .font(.system(size: 9, weight: .medium, design: .default))
+                                    .foregroundColor(.txtTitle)
+                                TextField("아이디를 입력해주세요.", text: $viewModel.id)
+                            }.padding()
+                                .frame(height: 70)
+                                .background(Color.txtField)
+                                .cornerRadius(5)
                             Button {
                                 viewModel.apply(.checkId)
                             } label: {
-                                Text("확인")
-                                    .font(.system(size: 10))
+                                Text("중복확인")
+                                    .font(.system(size: 12, weight: .medium, design: .default))
                                     .foregroundColor(.black)
                                     .padding()
-                                    .frame(width: 50, height: 30)
-                                    .border(.black, width: 0.5)
+                                    .frame(height: 40)
+                                    .background(Color.white)
+                                    .cornerRadius(5)
+                                Spacer()
+                                    .frame(width: 5)
                             }
+
                         }
+                        Spacer()
                     }
-                    Spacer()
+
+                    HStack(spacing: 35) {
+                        Spacer()
+                        VStack(alignment: .leading) {
+                            Text("비밀번호")
+                                .font(.system(size: 9, weight: .medium, design: .default))
+                                .foregroundColor(.txtTitle)
+                            TextField("비밀번호를 입력해주세요.", text: $viewModel.id)
+                        }.padding()
+                            .frame(height: 70)
+                            .background(Color.txtField)
+                            .cornerRadius(5)
+                        Spacer()
+                    }
+
+                    HStack(spacing: 35) {
+                        Spacer()
+                        VStack(alignment: .leading) {
+                            Text("이름")
+                                .font(.system(size: 9, weight: .medium, design: .default))
+                                .foregroundColor(.txtTitle)
+                            TextField("이름을 입력해주세요.", text: $viewModel.id)
+                        }.padding()
+                            .frame(height: 70)
+                            .background(Color.txtField)
+                            .cornerRadius(5)
+                        Spacer()
+                    }
                 }
 
                 Spacer()
-                    .frame(height: 20)
 
-                HStack(spacing: 30) {
-                    Spacer()
-                    TextField("이름을 입력하세요.", text: $viewModel.name)
-                        .padding()
-                        .border(.black, width: 0.5)
-                    Spacer()
-                }
-
-                Spacer()
-                    .frame(height: 20)
-
-                HStack(spacing: 30) {
-                    Spacer()
-                    TextField("비밀번호를 입력해주세요", text: $viewModel.password)
-                        .padding()
-                        .border(.black, width: 0.5)
-                    Spacer()
-                }
-
-                Spacer()
-
-                HStack(spacing: 30) {
-                    Spacer()
-                    Button {
-                        viewModel.apply(.signup)
-                        self.moveScene = viewModel.isSuccess
-                    } label: {
+                Button {
+                    viewModel.apply(.signup)
+                } label: {
+                    HStack(spacing: 30) {
+                        Spacer()
                         Text("회원가입")
-                            .foregroundColor(Color.white)
-                            .font(.system(size: 30, weight: .bold))
-                            .frame(
-                                minWidth: 0,
-                                maxWidth: .infinity,
-                                minHeight: 0,
-                                maxHeight: 70
-                            )
-                            .background(Color.green)
-                            .cornerRadius(12)
+                            .font(.system(size: 15, weight: .semibold, design: .default))
+                            .foregroundColor(Color.authButton)
+                            .padding()
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .background(Color.txtField)
+                            .cornerRadius(5)
+                        Spacer()
                     }
-                    Spacer()
                 }
 
                 Spacer()
-                    .frame(height: 100)
-
-            }.navigationBarTitle("회원가입", displayMode: .inline)
-                .navigationColor(backgroundColor: .green, titleColor: .white)
+            }
         }
     }
 }
