@@ -33,9 +33,7 @@ extension RestAPI: TargetType {
             return "/auths/signups"
         case .checkId:
             return "/auths"
-        case .postCommunity, .fetchCommunity:
-            return "/posts"
-        case .deleteCommunity:
+        case .postCommunity, .fetchCommunity, .deleteCommunity:
             return "/posts"
         case .postComment(let postId, _):
             return "/comments?post_id=\(postId)"
