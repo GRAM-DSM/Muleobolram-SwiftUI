@@ -54,7 +54,6 @@ struct SignupView: View {
                                 Spacer()
                                     .frame(width: 5)
                             }
-
                         }
                         Spacer()
                     }
