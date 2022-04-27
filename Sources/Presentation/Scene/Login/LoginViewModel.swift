@@ -8,7 +8,7 @@ class LoginViewModel: ObservableObject {
 
     @Published var id: String = ""
     @Published var password: String = ""
-    @Published var isSuccess: Bool = false
+    @Published var isSuccess: Bool = true
 
     private var bag = Set<AnyCancellable>()
 
