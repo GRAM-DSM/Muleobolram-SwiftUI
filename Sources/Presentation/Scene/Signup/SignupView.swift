@@ -10,7 +10,7 @@ struct SignupView: View {
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
-            VStack {
+            VStack() {
                 Spacer()
                     .frame(height: 89)
                 HStack {
@@ -26,7 +26,6 @@ struct SignupView: View {
                     }
                     Spacer()
                 }
-
                 Spacer()
                 Group {
                     HStack(spacing: 35) {
@@ -37,6 +36,8 @@ struct SignupView: View {
                                     .font(.system(size: 9, weight: .medium, design: .default))
                                     .foregroundColor(.txtTitle)
                                 TextField("아이디를 입력해주세요.", text: $viewModel.id)
+                                    .foregroundColor(.black)
+                                    .multilineTextAlignment(.leading)
                             }.padding()
                                 .frame(height: 70)
                                 .background(Color.txtField)
@@ -64,7 +65,8 @@ struct SignupView: View {
                             Text("비밀번호")
                                 .font(.system(size: 9, weight: .medium, design: .default))
                                 .foregroundColor(.txtTitle)
-                            TextField("비밀번호를 입력해주세요.", text: $viewModel.id)
+                            TextField("비밀번호를 입력해주세요.", text: $viewModel.password)
+                                .foregroundColor(.black).multilineTextAlignment(.leading)
                         }.padding()
                             .frame(height: 70)
                             .background(Color.txtField)
@@ -78,7 +80,8 @@ struct SignupView: View {
                             Text("이름")
                                 .font(.system(size: 9, weight: .medium, design: .default))
                                 .foregroundColor(.txtTitle)
-                            TextField("이름을 입력해주세요.", text: $viewModel.id)
+                            TextField("이름을 입력해주세요.", text: $viewModel.name)
+                                .foregroundColor(.black).multilineTextAlignment(.leading)
                         }.padding()
                             .frame(height: 70)
                             .background(Color.txtField)
