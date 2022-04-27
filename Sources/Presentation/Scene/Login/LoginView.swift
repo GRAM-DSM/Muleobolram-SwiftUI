@@ -6,108 +6,79 @@ struct LoginView: View {
 
     var body: some View {
         NavigationView {
+        ZStack {
+            Image.backgroundImage
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+
             VStack {
-                Spacer()
-                    .frame(height: 40)
 
-                HStack {
-                    Spacer()
-                        .frame(width: 30)
-                    Text("물어\n볼램")
-                        .font(.system(size: 50, weight: .bold))
-                        .bold()
+                Spacer()
+                    .frame(height: 290)
+
+                AuthTxtField(title: "아이디를 입력해주세요", text: $viewModel.id)
+
+                Spacer()
+                    .frame(height: 10)
+
+                        if !viewModel.isSuccess {
+                                HStack(spacing: 35) {
+                                    Spacer()
+                                    VStack(alignment: .leading) {
+                                    TextField("비밀번호를 입력해주세요.", text: $viewModel.password)
+                                        .padding()
+                                        .background(Color.txtField)
+                                        .cornerRadius(5)
+                                        .border(.red, width: 0.5)
+                                        Text("아이디나 비밀번호가 일치하지 않습니다.")
+                                            .font(.system(size: 11, weight: .semibold, design: .default))
+                                            .foregroundColor(.red)
+                                    }
+                                    Spacer()
+                                }
+                        } else {
+                            AuthTxtField(title: "비밀번호를 입력해주세요.", text: $viewModel.password)
                     Spacer()
                 }
 
                 Spacer()
-                    .frame(height: 150)
-
-                HStack(spacing: 30) {
-                    Spacer()
-                    TextField("아이디를 입력해주세요.", text: $viewModel.id)
-                        .background(Color.clear)
-                        .foregroundColor(.black)
-                        .padding(EdgeInsets(
-                            top: 15,
-                            leading: 10,
-                            bottom: 15,
-                            trailing: 10
-                        ))
-                        .border(.black, width: 0.5)
-                    Spacer()
-                }
-
-                Spacer()
-                    .frame(height: 20)
-
-                HStack(spacing: 30) {
-                    Spacer()
-                    TextField("비밀번호를 입력해주세요.", text: $viewModel.password)
-                        .background(Color.clear)
-                        .foregroundColor(.black)
-                        .padding(EdgeInsets(
-                            top: 15,
-                            leading: 10,
-                            bottom: 15,
-                            trailing: 10
-                        ))
-                        .border(.black, width: 0.5)
-                    Spacer()
-                }
-
-                Spacer()
-
-                Group {
-                    NavigationLink {
-                        CommunityView(moveScene: $viewModel.isSuccess)
+                NavigationLink {
+                    CommunityView(moveScene: $viewModel.isSuccess)
+                } label : {
+                    Button {
+                        self.viewModel.apply(.login)
                     } label: {
-                        Button {
-                            viewModel.apply(.login)
-                        } label: {
-                            HStack(spacing: 30) {
-                                Spacer()
-                                Text("로그인")
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 30, weight: .bold))
-                                    .frame(
-                                        minWidth: 0,
-                                        maxWidth: .infinity,
-                                        minHeight: 0,
-                                        maxHeight: 70
-                                    )
-                                    .background(Color.green)
-                                    .cornerRadius(12)
-                                Spacer()
-                            }
-                        }
-                    }
-                    Spacer()
-                        .frame(height: 50)
-                    NavigationLink {
-                        SignupView(moveScene: $moveSignup)
-                    } label: {
-                        Button {
-                            print("회원가입")
-                        } label: {
-                            HStack {
-                                Text("아직 계정이 없다면?")
-                                    .foregroundColor(.black)
-                                Spacer()
-                                    .frame(width: 15)
-                                Text("회원가입 하러 가기")
-                                    .foregroundColor(.blue)
-                            }.padding(EdgeInsets(
-                                top: 10,
-                                leading: 10,
-                                bottom: 10,
-                                trailing: 10
-                            ))
+                        HStack(spacing: 30) {
+                            Spacer()
+                            Text("로그인")
+                                .font(.system(size: 15, weight: .semibold, design: .default))
+                                .foregroundColor(Color.authButton)
+                                .padding()
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .background(Color.txtField)
+                            Spacer()
                         }
                     }
                 }
+
+                Spacer()
+                    .frame(height: 67)
+
+                Button {
+                    moveSignup.toggle()
+                } label: {
+                    Text("회원가입하기 >")
+                        .font(.system(size: 11, weight: .medium, design: .default))
+                        .foregroundColor(Color.moveSignupTxt)
+                        .fullScreenCover(isPresented: $moveSignup) {
+                            SignupView(moveScene: $moveSignup)
+                        }
+                }
+
+                Spacer()
             }
-            .navigationBarTitle(Text("로그인"), displayMode: .inline)
-            .navigationColor(backgroundColor: .green, titleColor: .white)
+        }
         }
     }
 }
