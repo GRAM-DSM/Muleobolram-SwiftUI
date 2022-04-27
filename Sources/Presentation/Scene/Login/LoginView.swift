@@ -17,7 +17,14 @@ struct LoginView: View {
                 Spacer()
                     .frame(height: 290)
 
-                AuthTxtField(title: "아이디를 입력해주세요", text: $viewModel.id)
+                HStack(spacing: 35) {
+                    Spacer()
+                    TextField("아이디를 입력해주세요.", text: $viewModel.id)
+                        .padding()
+                        .background(Color.txtField)
+                        .cornerRadius(5)
+                    Spacer()
+                }
 
                 Spacer()
                     .frame(height: 10)
@@ -38,14 +45,21 @@ struct LoginView: View {
                                     Spacer()
                                 }
                         } else {
-                            AuthTxtField(title: "비밀번호를 입력해주세요.", text: $viewModel.password)
+                            HStack(spacing: 35) {
+                                Spacer()
+                                TextField("비밀번호를 입력해주세요.", text: $viewModel.password)
+                                    .padding()
+                                    .background(Color.txtField)
+                                    .cornerRadius(5)
+                                Spacer()
+                            }
                     Spacer()
                 }
 
                 Spacer()
                 NavigationLink {
                     CommunityView(moveScene: $viewModel.isSuccess)
-                } label : {
+                } label: {
                     Button {
                         self.viewModel.apply(.login)
                     } label: {
@@ -57,6 +71,7 @@ struct LoginView: View {
                                 .padding()
                                 .frame(minWidth: 0, maxWidth: .infinity)
                                 .background(Color.txtField)
+                                .cornerRadius(5)
                             Spacer()
                         }
                     }
