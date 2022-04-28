@@ -10,12 +10,16 @@ struct SignupView: View {
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
-            VStack() {
+
+            VStack {
                 Spacer()
                     .frame(height: 89)
+
                 HStack {
+
                     Spacer()
                         .frame(width: 48)
+
                     Button {
                         self.moveScene.toggle()
                     } label: {
@@ -24,24 +28,33 @@ struct SignupView: View {
                             .frame(width: 18, height: 18)
                             .padding()
                     }
+
                     Spacer()
                 }
+
                 Spacer()
+
                 Group {
                     HStack(spacing: 35) {
                         Spacer()
+
                         ZStack(alignment: .trailing) {
+
                             VStack(alignment: .leading) {
+
                                 Text("아이디")
                                     .font(.system(size: 9, weight: .medium, design: .default))
                                     .foregroundColor(.txtTitle)
+
                                 TextField("아이디를 입력해주세요.", text: $viewModel.id)
                                     .foregroundColor(.black)
                                     .multilineTextAlignment(.leading)
+
                             }.padding()
                                 .frame(height: 70)
                                 .background(Color.txtField)
                                 .cornerRadius(5)
+
                             Button {
                                 viewModel.apply(.checkId)
                             } label: {
@@ -52,6 +65,7 @@ struct SignupView: View {
                                     .frame(height: 40)
                                     .background(Color.white)
                                     .cornerRadius(5)
+
                                 Spacer()
                                     .frame(width: 5)
                             }
@@ -61,31 +75,41 @@ struct SignupView: View {
 
                     HStack(spacing: 35) {
                         Spacer()
+
                         VStack(alignment: .leading) {
+
                             Text("비밀번호")
                                 .font(.system(size: 9, weight: .medium, design: .default))
                                 .foregroundColor(.txtTitle)
+
                             TextField("비밀번호를 입력해주세요.", text: $viewModel.password)
                                 .foregroundColor(.black).multilineTextAlignment(.leading)
+
                         }.padding()
                             .frame(height: 70)
                             .background(Color.txtField)
                             .cornerRadius(5)
+
                         Spacer()
                     }
 
                     HStack(spacing: 35) {
                         Spacer()
+
                         VStack(alignment: .leading) {
+
                             Text("이름")
                                 .font(.system(size: 9, weight: .medium, design: .default))
                                 .foregroundColor(.txtTitle)
+
                             TextField("이름을 입력해주세요.", text: $viewModel.name)
                                 .foregroundColor(.black).multilineTextAlignment(.leading)
+
                         }.padding()
                             .frame(height: 70)
                             .background(Color.txtField)
                             .cornerRadius(5)
+
                         Spacer()
                     }
                 }
@@ -97,6 +121,7 @@ struct SignupView: View {
                 } label: {
                     HStack(spacing: 30) {
                         Spacer()
+
                         Text("회원가입")
                             .font(.system(size: 15, weight: .semibold, design: .default))
                             .foregroundColor(Color.authButton)
@@ -104,6 +129,7 @@ struct SignupView: View {
                             .frame(minWidth: 0, maxWidth: .infinity)
                             .background(Color.txtField)
                             .cornerRadius(5)
+
                         Spacer()
                     }
                 }
