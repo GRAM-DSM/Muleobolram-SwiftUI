@@ -13,20 +13,20 @@ struct SignupView: View {
 
             VStack {
                 Spacer()
-                    .frame(height: 89)
+                    .frame(height: 105)
 
                 HStack {
 
                     Spacer()
-                        .frame(width: 48)
+                        .frame(width: 55)
 
                     Button {
                         self.moveScene.toggle()
                     } label: {
                         Image(systemName: "chevron.backward")
                             .foregroundColor(.white)
-                            .frame(width: 18, height: 18)
                             .padding()
+                            .frame(width: 20, height: 20)
                     }
 
                     Spacer()
