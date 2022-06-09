@@ -13,6 +13,7 @@ enum RestAPI {
     case postCommunity(title: String, content: String)
     case fetchCommunity
     case deleteCommunity(postId: Int)
+    case fetchDetailCommunity(postId: Int)
 
     // comment
     case postComment(postId: Int, content: String)
@@ -33,7 +34,7 @@ extension RestAPI: TargetType {
             return "/auths/signups"
         case .checkId:
             return "/auths"
-        case .postCommunity, .fetchCommunity, .deleteCommunity:
+        case .postCommunity, .fetchCommunity, .deleteCommunity, .fetchDetailCommunity:
             return "/posts"
         case .postComment(let postId, _):
             return "/comments?post_id=\(postId)"
@@ -44,7 +45,7 @@ extension RestAPI: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .fetchCommunity, .fetchComment:
+        case .fetchCommunity, .fetchComment, .fetchDetailCommunity:
             return .get
         case .deleteCommunity:
             return .delete
@@ -94,6 +95,13 @@ extension RestAPI: TargetType {
                 ], encoding: JSONEncoding.default
             )
         case .fetchComment(let postId):
+            return .requestParameters(
+                parameters: [
+                    "post_id": postId
+                ],
+                encoding: URLEncoding.queryString
+            )
+        case .fetchDetailCommunity(let postId):
             return .requestParameters(
                 parameters: [
                     "post_id": postId
