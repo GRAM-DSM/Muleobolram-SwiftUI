@@ -62,6 +62,13 @@ final class DataSource: MoyaProvider<RestAPI> {
             .eraseToAnyPublisher()
     }
 
+    func fetchDetailCommunity(_ postId: Int) -> Future<CommunityDetail, NetworkingError> {
+        return Future<CommunityDetail, NetworkingError> { _ in
+            self.requestPublisher(.fetchDetailCommunity(postId: postId), CommunityDetailDTO.self)
+                .map { $0.toDomain() }
+        }
+    }
+
     // comment
     func postComment(
         _ postId: Int,
