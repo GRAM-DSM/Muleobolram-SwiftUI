@@ -12,6 +12,7 @@ protocol Repository {
     func postCommunity(_ title: String, _ content: String) -> Future<Void, NetworkingError>
     func fetchCommunity() -> AnyPublisher<[Community], NetworkingError>
     func deletCommunity(_ postId: Int) -> Future<Void, NetworkingError>
+    func fetchDetailCommunity(_ postId: Int) -> Future<CommunityDetail, NetworkingError>
 
     // comment
     func postComment(_ postId: Int, _ content: String) -> Future<Void, NetworkingError>
