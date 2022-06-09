@@ -5,4 +5,5 @@ extension Color {
     static let authButton = Self("authButton")
     static let moveSignupTxt = Self("moveSignupTxt")
     static let txtTitle = Self("txtTitle")
+    static let shadow = Self("3ABD2F")
 }
