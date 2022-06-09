@@ -22,5 +22,4 @@ extension MoyaProvider {
             .mapError { NetworkingError($0) }
         }
     }
-
 }
