@@ -59,4 +59,7 @@ final class DefaultRepository: Repository {
         return dataSource.fetchComment(postId)
     }
 
+    func fetchDetailCommunity(_ postId: Int) -> Future<CommunityDetail, NetworkingError> {
+        return dataSource.fetchDetailCommunity(postId)
+    }
 }
