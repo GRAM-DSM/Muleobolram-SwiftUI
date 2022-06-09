@@ -3,12 +3,11 @@ import Foundation
 import Combine
 
 class LoginViewModel: ObservableObject {
-
-    private let loginUseCase: LoginUseCase
-
     @Published var id: String = ""
     @Published var password: String = ""
     @Published var isSuccess: Bool = true
+
+    private let loginUseCase: LoginUseCase
 
     private var bag = Set<AnyCancellable>()
 
