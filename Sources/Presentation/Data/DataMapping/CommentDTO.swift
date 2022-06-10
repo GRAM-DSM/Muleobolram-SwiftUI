@@ -3,7 +3,7 @@ import Foundation
 // MARK: DTO
 struct CommentDTO: Decodable {
     private enum CodingKeys: String, CodingKey {
-        case writer = "id"
+        case writer = "user_id"
         case content
     }
     let writer: String
