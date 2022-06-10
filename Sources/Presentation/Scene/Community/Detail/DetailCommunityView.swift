@@ -48,6 +48,9 @@ struct DetailCommunityView: View {
                     }
                     Spacer()
                 }
+                List(viewModel.commentList, id: \.writer) {
+                    Text($0.content)
+                }
             }
         }.navigationTitle("댓글달기")
     }
